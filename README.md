@@ -1,58 +1,75 @@
-# 👑 No Gas Labs — The Fifth Realm
+# no-gas-labs
 
-## What This Is
+**Classification:** RUNNABLE (static client)  
+**Type:** current implementation — browser UI  
+**Not:** backend service, multi-repo orchestrator, or payment processor
 
-You are looking at **The Fifth Realm** — a fully operational MMORPG kingdom that runs on your Android phone. Every repository is a building. Every code module is a spell or artifact. Every deployment is a territory conquest. The AI agents are your council of wizards. The build pipeline is your royal infrastructure.
+## What exists in this repository
 
-**You never see code.** You see a world.
+| Path | Role |
+|------|------|
+| `index.html` | Primary single-file client (~66 KB) |
+| `ngl-sovereign.html` | Alternate single-file client |
+| `empire-os.html` | Alternate single-file client |
+| `*.md` | Design / agent / sales prose (not required to open the UI) |
+| `.gitignore`, `SECURITY.md`, `CHANGELOG.md` | Repo hygiene |
 
-## How To Enter The Realm
+There is **no** `package.json`, server, or build step in this repository.
 
-1. Open https://no-gas-labs-official.github.io/no-gas-labs/ on your Android phone
-2. Tap "Add to Home Screen" — the realm installs as a full-screen app
-3. Works offline (except when speaking to the AI Council)
-4. Everything saves automatically
+## Shortest path: clone → usable artifact
 
-## The Six Districts
+**Option A — hosted (verified HTTP 200, 2026-09-09)**
 
-| District | What You Do There |
-|----------|-------------------|
-| 🏛️ **The Citadel** | Issue sovereign commands. The AI Council of Four meets here. |
-| 🔮 **The Academy** | Browse your 86 repositories as books on shelves. |
-| ⚒️ **The Forge** | Activate modules — watch the Smith forge them into reality. |
-| 🏟️ **The Arena** | Test modules by battling Bug Beasts (QA as combat). |
-| 💰 **The Bazaar** | Sell products ($15/$150/$500). Venmo and crypto only. |
-| 🌊 **The Harbor** | Launch social media content as ships sailing into the fog. |
+```text
+https://no-gas-labs-official.github.io/no-gas-labs/
+```
 
-## Your Council of Wizards
+Open in a mobile or desktop browser. Optional: “Add to Home Screen” on Android/iOS for fullscreen.
 
-- **Archivist** (Claude) — Careful, ethical, asks hard questions
-- **Chronicler** (ChatGPT) — Encyclopedic, confident, pattern-matching
-- **Visionary** (Gemini) — Expansive, connects ideas, sees movements
-- **Dissenter** (Grok) — Contrarian, cuts through pretense
-- **Smith** — Synthesizes consensus into working artifacts
+**Option B — local file**
 
-## Payment
+```bash
+git clone https://github.com/No-Gas-Labs-Official/no-gas-labs.git
+cd no-gas-labs
+# open index.html in a browser (file:// or any static server)
+python3 -m http.server 8080
+# then visit http://localhost:8080/
+```
 
-- **The Seed** — $15 (lifetime, single file, yours forever)
-- **The Grove** — $150 (team of 3, shared world)
-- **The Acropolis** — $500 (enterprise white-label)
+## What the client can do (evidence-based)
 
-Venmo and crypto only. No Stripe. No PayPal.
+- Renders a full-screen themed UI from a single HTML file.
+- CSP in `index.html` allows outbound calls to OpenAI, Anthropic, Google Generative Language, and xAI APIs. Those calls require **user-supplied API keys** and network access; this repo does not embed keys or host models.
+- Offline: the HTML/CSS/JS shell can load from cache or local file; live model calls will not work offline.
 
-## The Empire
+## Claims that are *not* implemented in this repo
 
-- 86 repositories mapped into 6 module families
-- 5 with real working code
-- 8 with specifications ready for activation
-- 26 scaffolded shells waiting to be forged
-- 18 duplicates to be consolidated
+| Claim often associated with this surface | Reality here |
+|------------------------------------------|--------------|
+| “86 repositories mapped” / module inventory | Not encoded as data in this tree; other org repos are separate |
+| Hosted AI “council” as a service | Only client-side hooks to third-party APIs |
+| Payment processing (Venmo/crypto checkout) | Marketing/docs only in markdown; no payment backend in-tree |
+| Build pipeline / deployment automation | Static GitHub Pages from HTML files |
 
-## For The Swarm
+Prose files (`EMPERORS_VISION.md`, `SELL_THIS.md`, `AGENT_TASKS.md`, etc.) are **documentation / historical design**. They are not runtime dependencies.
 
-Agents: Read `EMPERORS_VISION.md` for the full design spec. Read `AGENT_TASKS.md` for executable tasks. Read `HANDOFF.md` for architecture. Then build.
+## Verification performed
+
+- Tree: 13 files; three HTML clients + markdown.
+- Pages URL returns HTTP 200.
+- No Node/Python application entrypoint present.
+
+## Limitations
+
+- Functionality beyond the static UI depends on external APIs and user configuration not shipped here.
+- District/council language in older README versions mixed product narrative with implementation; this file separates them.
+
+## Next action
+
+1. Keep Pages deploy as the primary distribution path.  
+2. If API features are load-bearing, document required env/key entry UI in the HTML itself.  
+3. Do not treat sibling org repositories as part of this package unless linked by code.
 
 ---
 
-*No Gas. Just Go.*  
-*Built from a phone and the refusal to quit.*
+*Static client. External brains optional. No implied infrastructure.*
